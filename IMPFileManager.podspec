@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.osx.deployment_target = "10.12"
     s.swift_version = "4.2"
 
-    s.source_files  = 'System/**/*.{h,m,swift}'
+    s.source_files  = 'System/**/*.{h,m,swift}','Cache/**/*.{swift}'
     s.public_header_files = 'System/**/*.h'
     
     s.requires_arc = true
