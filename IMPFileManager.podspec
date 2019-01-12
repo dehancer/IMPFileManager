@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'IMPFileManager'
-    s.version      = '0.1.0'
+    s.version      = '0.2.0'
     s.license      = { :type => 'MIT', :file => 'LICENSE' }
     s.author       = { 'Denn Nevera' => 'https://imagemetalling.wordpress.com/' }
     s.homepage     = 'http://www.dehancer.com/'
