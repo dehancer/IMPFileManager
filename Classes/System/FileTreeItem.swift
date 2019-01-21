@@ -10,6 +10,20 @@ import Foundation
 import Cocoa
 
 extension URL {
+    
+    public var isHidden: Bool {
+        get {
+            return (try? resourceValues(forKeys: [.isHiddenKey]))?.isHidden == true
+        }
+        set {
+            var resourceValues = URLResourceValues()
+            resourceValues.isHidden = newValue
+            do {
+                try setResourceValues(resourceValues)
+            } catch {}
+        }
+    }
+    
     public func utiMatched(types:[String]) -> Bool {
         do{
             
