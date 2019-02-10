@@ -321,14 +321,18 @@ extension DiskStorage {
         {
             self.name = Bundle.main.bundleIdentifier ?? "com.dehancer.desktop"
             self.fileManager = fileManager
-            let subfolder = name + (id.isEmpty ? "" : "."+id)
-            self.directory = directory ?? URL(fileURLWithPath: Config.diskCachePath(cacheName:subfolder), isDirectory: true)
+            let subfolder = name
+            self.directory = directory ?? URL(fileURLWithPath: Config.diskCachePath(cacheName:subfolder, placeHolder:(id.isEmpty ? "" : "."+id)), isDirectory: true)
             self.sizeLimit = sizeLimit
         }
         
-        private static func diskCachePath(cacheName: String) -> String {
-            let dstPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
-            return (dstPath as NSString).appendingPathComponent(cacheName)
+        private static func diskCachePath(cacheName: String, placeHolder: String) -> String {
+            var dstPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
+            dstPath = (dstPath as NSString).appendingPathComponent(cacheName)
+            if !placeHolder.isEmpty {
+                dstPath = (dstPath as NSString).appendingPathComponent(placeHolder)
+            }
+            return dstPath
         }
     }
 }
