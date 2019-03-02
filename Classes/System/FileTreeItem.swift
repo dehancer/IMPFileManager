@@ -122,9 +122,9 @@ open class FileTreeItem: NSObject, NSCoding{
         case image
     }
     
-    open override var hashValue: Int {
-        return url.hashValue
-    }
+//    override var hashValue: Int {
+//        return url.hashValue
+//    }
     
     public static func == (lhs: FileTreeItem, rhs: FileTreeItem) -> Bool {
         return lhs.url.path == rhs.url.path
