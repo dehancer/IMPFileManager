@@ -195,7 +195,7 @@ open class Cache<Object:CacheSerializer,ObjectData:DataTransformable> {
     {
         
         let totalMemory = ProcessInfo.processInfo.physicalMemory
-        let costLimit = totalMemory / 4
+        let costLimit = totalMemory / 8
         let memoryStorage = MemoryStorage.Backend<Object>(config:
             .init(totalCostLimit: (costLimit > Int.max) ? Int.max : Int(costLimit)))
         
@@ -237,7 +237,7 @@ open class Cache<Object:CacheSerializer,ObjectData:DataTransformable> {
         
         let computedKey = key.computedKey(with: identifier)
         // Memory storage should not throw.
-        memoryStorage.storeNoThrow(value: image, forKey: computedKey, expiration: .never)
+        memoryStorage.storeNoThrow(value: image, forKey: computedKey)
         
         guard toDisk else {
             if let completionHandler = completionHandler {

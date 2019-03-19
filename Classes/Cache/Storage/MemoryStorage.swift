@@ -55,9 +55,13 @@ public enum MemoryStorage {
         ///                     default expiration setting and more.
         public init(config: Config) {
             self.config = config
+            
             storage.totalCostLimit = config.totalCostLimit
+            
             storage.countLimit = config.countLimit
+            
             storage.delegate = cacheDelegate
+           
             cacheDelegate.onObjectRemoved.delegate(on: self) { (self, obj) in
                 self.keys.remove(obj.key)
             }
@@ -66,11 +70,14 @@ public enum MemoryStorage {
                 guard let self = self else { return }
                 self.removeExpired()
             }
+            
+            debugPrint("# MemoryStorage.config: ", Thread.isMainThread, storage.totalCostLimit, storage.countLimit, config.cleanInterval, cleanTimer)
         }
         
         func removeExpired() {
             lock.lock()
             defer { lock.unlock() }
+            
             for key in keys {
                 let nsKey = key as NSString
                 guard let object = storage.object(forKey: nsKey) else {
