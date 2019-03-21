@@ -341,7 +341,6 @@ open class FileTreeItem: NSObject, NSCoding{
     private var _rating:Int?
     public var rating:Int {
         get {                  
-            if let r = _rating { return r }
             if let r = FileAttributes(path: url.path).value(forAttribute: FileTreeItem.ratingKey) {
                 _rating = Int(r) ?? 0
                 return _rating!
@@ -575,11 +574,10 @@ public extension FileTreeItem {
         return cache[hash]
     }
     
-    private func getItemFrom(urls: [URL]?, cache: inout UrlsCacheType, at index: Int, withLevel level: Int? = nil) -> FileTreeItem? {            
-        if let u = urls?[index] {
-            return getItemFrom(url: u, cache: &cache, withLevel: level)
-        }
-        return nil
+    private func getItemFrom(urls: [URL]?, cache: inout UrlsCacheType, at index: Int, withLevel level: Int? = nil) -> FileTreeItem? {
+        guard let urls = urls, index < urls.count else { return nil }
+        let u = urls[index]
+        return getItemFrom(url: u, cache: &cache, withLevel: level)
     }
     
     public func prefetchExpanded(willPrefetch:((_ prefetching:Bool)->Void)? = nil, complete:((_ items:[FileTreeItem])->Void)) {
