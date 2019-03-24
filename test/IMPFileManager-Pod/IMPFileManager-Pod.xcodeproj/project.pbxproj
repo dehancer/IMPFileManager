@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -177,6 +177,11 @@
 				TargetAttributes = {
 					313E13AC21EA502900D9A281 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					313E13BC21EA502900D9A281 = {
 						CreatedOnToolsVersion = 10.1;
@@ -251,16 +256,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IMPFileManager-Pod/Pods-IMPFileManager-Pod-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IMPFileManager/IMPFileManager.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-IMPFileManager-Pod/Pods-IMPFileManager-Pod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IMPFileManager.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-IMPFileManager-Pod/Pods-IMPFileManager-Pod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -450,7 +450,6 @@
 			baseConfigurationReference = 5285977EAE3CBAC0A6B008E2 /* Pods-IMPFileManager-Pod.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "IMPFileManager-Pod/IMPFileManager_Pod.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -472,7 +471,6 @@
 			baseConfigurationReference = 6CB44243D3FD39F692E865A1 /* Pods-IMPFileManager-Pod.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "IMPFileManager-Pod/IMPFileManager_Pod.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

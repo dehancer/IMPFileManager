@@ -111,6 +111,22 @@ public enum DiskStorage {
             return try value(forKey: key, referenceDate: Date(), actuallyLoad: true)
         }
         
+        func modificationDate(forKey key: String) throws -> Date? {
+           
+            let fileManager = config.fileManager
+            let fileURL = cacheFileURL(forKey: key)
+            let filePath = fileURL.path
+           
+            guard fileManager.fileExists(atPath: filePath) else {
+                return nil
+            }
+            
+            let resourceKeys: Set<URLResourceKey> = [.contentModificationDateKey, .creationDateKey]
+            let meta = try FileMeta(fileURL: fileURL, resourceKeys: resourceKeys)
+            
+            return meta.estimatedExpirationDate
+        }
+        
         func value(forKey key: String, referenceDate: Date, actuallyLoad: Bool) throws -> T? {
             let fileManager = config.fileManager
             let fileURL = cacheFileURL(forKey: key)

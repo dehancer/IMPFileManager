@@ -381,6 +381,10 @@ open class Cache<Object:CacheSerializer,ObjectData:DataTransformable> {
         }
     }
     
+    open func modificationAt(forKey key: String, id identifier: String) -> Date? {       
+        return createdAtMemoryCache(forKey: key, id: identifier) ?? modificationDateInDiskCache(forKey: key, id: identifier)
+    }
+    
     open func retrieve(forKey key: String,
                        id identifier: String,
                        callbackQueue: CallbackQueue = .untouch,
@@ -429,6 +433,22 @@ open class Cache<Object:CacheSerializer,ObjectData:DataTransformable> {
     }
     
     // MARK: Getting Images
+    
+    private func createdAtMemoryCache( forKey key: String, id identifier: String = "") -> Date?
+    {
+        do {
+            return try memoryStorage.createdAt(forKey: key.computedKey(with: identifier))
+        }
+        catch { return nil }
+    }
+
+    private func modificationDateInDiskCache(forKey key: String, id identifier: String = "")  -> Date?
+    {
+        do {
+            return try self.diskStorage.modificationDate(forKey:  key.computedKey(with: identifier))
+        }
+        catch {return nil}
+    }
     
     private func retrieveImageInMemoryCache( forKey key: String, id identifier: String = "") -> Object?
     {

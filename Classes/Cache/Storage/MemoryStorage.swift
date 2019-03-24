@@ -143,6 +143,13 @@ public enum MemoryStorage {
             return true
         }
         
+        func createdAt(forKey key: String) -> Date? {
+            guard let object = storage.object(forKey: key as NSString) else {
+                return nil
+            }
+            return object.createdAt
+        }
+        
         func remove(forKey key: String) throws {
             lock.lock()
             defer { lock.unlock() }
@@ -206,6 +213,7 @@ extension MemoryStorage {
         let value: T
         let expiration: StorageExpiration
         let key: String
+        let createdAt: Date
         
         private(set) var estimatedExpiration: Date
         
@@ -213,6 +221,7 @@ extension MemoryStorage {
             self.value = value
             self.key = key
             self.expiration = expiration
+            self.createdAt = Date()
             
             self.estimatedExpiration = expiration.estimatedExpirationSinceNow
         }
