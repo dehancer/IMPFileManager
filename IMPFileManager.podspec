@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
     s.source       = { :git => 'https://github.com/dehancer/IMPFileManager', :tag => s.version}
     
     s.osx.deployment_target = "10.12"
-    s.swift_version = "4.2"
+    s.swift_version = "5.0"
 
     s.source_files  = 'Classes/**/*.{h,m,swift}'
     s.public_header_files = 'Classes/System/**/*.h'
